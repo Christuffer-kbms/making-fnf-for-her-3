@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pick Your Death — Rhythm Monkeys</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <section id="welcome" class="screen active">
+    <div class="scanlines"></div>
+    <div class="welcome-card">
+      <div class="small-tag">A RHYTHM BATTLE</div>
+      <h1>PICK YOUR <span>DEATH</span></h1>
+      <p>Birthday Girl vs. Chris</p>
+      <button id="enterBtn" class="fnf-btn">ENTER</button>
+      <div class="hint">Use your keyboard • A S K L</div>
+    </div>
+  </section>
+
+  <section id="menu" class="screen">
+    <div class="menu-wrap">
+      <div class="menu-title">PICK YOUR <span>DEATH</span></div>
+      <div class="menu-sub">CHOOSE A MODE</div>
+      <div class="song-grid">
+        <button class="song-card" data-mode="easy">
+          <b>EASY</b><strong>MAX DONT DO IT</strong><small>Warm-up • 139.7 BPM</small>
+        </button>
+        <button class="song-card" data-mode="medium">
+          <b>MEDIUM</b><strong>HOME MADE KAZOKU</strong><small>Fast chart • 112.3 BPM</small>
+        </button>
+        <button class="song-card danger" data-mode="hard">
+          <b>HARD</b><strong>GALAXY COLLAPSE</strong><small>Brutal, but beatable • 99.4 BPM</small>
+        </button>
+      </div>
+      <button id="menuHelp" class="text-btn">HOW TO PLAY</button>
+    </div>
+  </section>
+
+  <section id="help" class="screen">
+    <div class="help-card">
+      <h2>HOW TO PLAY</h2>
+      <p>Hit the notes when they reach the four receptors.</p>
+      <div class="keys"><span>A</span><span>S</span><span>K</span><span>L</span></div>
+      <p>Good timing builds your combo. Missed notes count as MISS and break your combo, but you always continue through the full song.</p>
+      <button id="backHelp" class="fnf-btn">BACK</button>
+    </div>
+  </section>
+
+  <section id="game" class="screen">
+    <div class="hud">
+      <div class="name opponent-name">CHRIS</div>
+      <div class="health"><div id="healthFill"></div></div>
+      <div class="scoreline"><span id="score">0</span><span id="combo">COMBO 0</span><span id="accuracy">100%</span></div>
+      <div class="name player-name">BIRTHDAY GIRL</div>
+    </div>
+    <div class="stage">
+      <div class="character opponent">
+        <img src="assets/characters/chris.png" alt="Chris">
+      </div>
+      <div class="character player">
+        <img src="assets/characters/birthday-girl.png" alt="Birthday Girl">
+      </div>
+      <div id="judgement">READY?</div>
+      <div id="noteField" aria-label="Falling notes"></div>
+      <div class="receptors">
+        <div data-lane="0"><span class="arrow">←</span><small>A</small></div>
+        <div data-lane="1"><span class="arrow">↓</span><small>S</small></div>
+        <div data-lane="2"><span class="arrow">↑</span><small>K</small></div>
+        <div data-lane="3"><span class="arrow">→</span><small>L</small></div>
+      </div>
+    </div>
+    <div class="game-bottom">
+      <span id="songLabel">SONG</span><span id="progress">0:00</span>
+      <button id="quitGame" class="text-btn">MENU</button>
+    </div>
+  </section>
+
+  <section id="results" class="screen">
+    <div class="results-card">
+      <div class="small-tag">SONG COMPLETE</div>
+      <h2 id="resultTitle">NICE!</h2>
+      <div class="result-stats">
+        <div><span>SCORE</span><b id="finalScore">0</b></div>
+        <div><span>ACCURACY</span><b id="finalAccuracy">0%</b></div>
+        <div><span>MAX COMBO</span><b id="finalCombo">0</b></div>
+      </div>
+      <div class="result-buttons">
+        <button id="replayBtn" class="fnf-btn">REPLAY</button>
+        <button id="resultMenuBtn" class="fnf-btn alt">SONG SELECT</button>
+        <button id="mainMenuBtn" class="text-btn">MAIN MENU</button>
+      </div>
+    </div>
+  </section>
+</div>
+<audio id="audio" preload="auto"></audio>
+<script src="game.js"></script>
+</body>
+</html>

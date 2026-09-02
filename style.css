@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+:root{--pink:#ff4da6;--cyan:#48e7ff;--yellow:#ffe14a;--green:#6dff7a;--dark:#070b12;--panel:#101826}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05070c;color:#fff;font-family:'VT323',monospace}
+body{background:radial-gradient(circle at 50% 35%,#162331 0,#070b12 45%,#020308 100%)}
+button{font:inherit;color:inherit;cursor:pointer}
+.screen{display:none;width:100%;height:100%;position:relative;align-items:center;justify-content:center}.screen.active{display:flex}
+.scanlines{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 4px)}
+.welcome-card,.results-card,.help-card{width:min(760px,90vw);text-align:center;padding:48px;border:2px solid #314052;background:rgba(8,12,20,.88);box-shadow:0 0 50px #000,8px 8px 0 #020307;transform:skew(-1deg)}
+.small-tag{font-family:'Press Start 2P';font-size:11px;letter-spacing:2px;color:var(--cyan);margin-bottom:24px}
+h1,h2,.menu-title{font-family:'Press Start 2P';text-transform:uppercase;margin:0}
+h1{font-size:clamp(30px,6vw,64px);line-height:1.2;text-shadow:5px 5px 0 #111}
+h1 span,.menu-title span{color:var(--pink)}
+.welcome-card p{font-size:28px;margin:24px 0 36px;color:#d7e2ed}.hint{margin-top:20px;color:#7890a4;font-size:18px}
+.fnf-btn{border:0;background:var(--pink);padding:15px 28px;font-family:'Press Start 2P';font-size:13px;box-shadow:5px 5px 0 #7a164d;transition:.1s}.fnf-btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #7a164d}.fnf-btn.alt{background:var(--cyan);color:#071016;box-shadow:5px 5px 0 #176b77}
+.text-btn{border:0;background:none;color:#9db0c2;font-family:'Press Start 2P';font-size:10px;margin-top:24px}.text-btn:hover{color:#fff}
+.menu-wrap{width:min(1100px,92vw);text-align:center}.menu-title{font-size:clamp(24px,4vw,48px);text-shadow:4px 4px 0 #111}.menu-sub{color:#72869a;font-family:'Press Start 2P';font-size:10px;margin:16px 0 30px}
+.song-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.song-card{min-height:190px;text-align:left;padding:24px;border:2px solid #2c3c4d;background:linear-gradient(145deg,#111b29,#0a1019);box-shadow:7px 7px 0 #030509;transition:.12s}.song-card:hover{transform:translateY(-6px);border-color:var(--cyan)}.song-card b{display:block;font-family:'Press Start 2P';font-size:11px;color:var(--cyan);margin-bottom:24px}.song-card strong{display:block;font-family:'Press Start 2P';font-size:13px;line-height:1.7}.song-card small{display:block;margin-top:22px;color:#788ea2;font-size:18px}.song-card.danger b{color:var(--pink)}.song-card.danger:hover{border-color:var(--pink)}
+.help-card h2,.results-card h2{font-size:26px;margin-bottom:26px}.help-card p{font-size:24px;color:#c8d4df}.keys{display:flex;justify-content:center;gap:12px;margin:28px}.keys span{width:64px;height:64px;display:grid;place-items:center;border:2px solid #46596d;background:#0d1520;font-family:'Press Start 2P';font-size:17px;box-shadow:4px 4px 0 #020306}
+#game{display:none;flex-direction:column;background:#02050a}#game.screen.active{display:flex}.hud{height:88px;width:100%;display:grid;grid-template-columns:180px 1fr 360px 180px;align-items:center;gap:15px;padding:12px 24px;background:#080e17;border-bottom:2px solid #1f2e3e;z-index:5}.name{font-family:'Press Start 2P';font-size:11px;text-align:center}.opponent-name{color:var(--pink)}.player-name{color:var(--cyan)}
+.health{height:22px;border:2px solid #263746;background:#020409;overflow:hidden}.health:before{content:"";display:block;height:100%;width:50%;background:linear-gradient(90deg,var(--pink),var(--pink) 49%,var(--cyan) 51%,var(--cyan));opacity:.9}.health #healthFill{height:100%;width:50%;background:transparent;transition:width .15s}
+.scoreline{display:flex;justify-content:space-between;font-family:'Press Start 2P';font-size:10px;color:#c9d5df;gap:12px}.scoreline span:nth-child(2){color:var(--yellow)}
+.stage{position:relative;flex:1;width:100%;overflow:hidden;background-image:linear-gradient(rgba(2,8,12,.15),rgba(2,8,12,.65)),url('assets/monkey.png');background-size:cover;background-position:center 48%}
+.stage:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 70%,rgba(0,0,0,.8)),repeating-linear-gradient(90deg,transparent 0,transparent 79px,rgba(66,230,160,.04) 80px),repeating-linear-gradient(0deg,transparent 0,transparent 79px,rgba(66,230,160,.04) 80px)}
+.character{position:absolute;bottom:115px;z-index:1;width:220px;height:350px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 18px 10px rgba(0,0,0,.7));transition:transform .08s}.character img{max-width:100%;max-height:100%;object-fit:contain}.character.opponent{left:10%;transform:scale(1.05)}.character.player{right:10%;transform:scale(1.05)}.character.hit{animation:hit .13s}.character.miss{animation:miss .18s}@keyframes hit{50%{transform:translateY(-14px) scale(1.08)}}@keyframes miss{50%{transform:rotate(-5deg) translateX(-5px)}}
+#judgement{position:absolute;top:26%;left:50%;transform:translateX(-50%);font-family:'Press Start 2P';font-size:20px;text-shadow:3px 3px #000;z-index:4;opacity:0}.judged{animation:judge .42s}@keyframes judge{0%{opacity:1;transform:translate(-50%,10px) scale(.8)}50%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-15px) scale(1.05)}}
+#gameCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:2}.receptors{position:absolute;z-index:3;bottom:28px;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:repeat(4,76px);gap:8px}.receptors div{height:76px;border:3px solid #8ea0b0;background:rgba(5,10,17,.78);display:grid;place-items:center;font-family:'Press Start 2P';font-size:14px;box-shadow:0 0 0 3px #111923}.receptors div.active{transform:translateY(5px);border-color:var(--yellow);background:rgba(255,225,74,.16)}
+.game-bottom{height:42px;width:100%;display:flex;justify-content:space-between;align-items:center;padding:0 20px;color:#71889b;font-family:'Press Start 2P';font-size:9px;background:#050a11;z-index:5}.game-bottom .text-btn{margin:0}
+.results-card{max-width:720px}.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:28px 0}.result-stats div{padding:18px;background:#0b121c;border:1px solid #2b3a49}.result-stats span{display:block;color:#7f95a8;font-family:'Press Start 2P';font-size:8px;margin-bottom:12px}.result-stats b{font-size:30px;color:var(--cyan)}.result-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+@media(max-width:800px){.song-grid{grid-template-columns:1fr}.hud{grid-template-columns:110px 1fr 170px 110px}.name{font-size:8px}.character{width:150px;height:260px;bottom:120px}.character.opponent{left:1%}.character.player{right:1%}.receptors{grid-template-columns:repeat(4,60px)}.receptors div{height:60px}.scoreline{font-size:8px}.scoreline span:first-child{display:none}}
+
+/* Gameplay visibility fixes */
+#gameCanvas{display:block;pointer-events:none;}
+.receptors div{position:relative;}
+.receptors div::after{content:"";position:absolute;inset:-7px;border:1px solid rgba(255,255,255,.12);pointer-events:none;}
+
+
+/* FNF-style arrow lanes */
+#noteField{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none;}
+.note{position:absolute;width:70px;height:70px;display:grid;place-items:center;transform:translate(-50%,-50%);font-family:Arial,sans-serif;font-size:52px;font-weight:900;line-height:1;border-radius:14px;border:4px solid #fff;box-shadow:0 0 18px rgba(255,255,255,.35),inset 0 0 12px rgba(255,255,255,.18);text-shadow:3px 3px 0 rgba(0,0,0,.55);will-change:transform,top;}
+.note[data-lane="0"]{background:#ff4da6}.note[data-lane="1"]{background:#48e7ff}.note[data-lane="2"]{background:#ffe14a;color:#10141b}.note[data-lane="3"]{background:#6dff7a;color:#10141b}
+.receptors{bottom:34px;grid-template-columns:repeat(4,86px);gap:10px;z-index:4;}
+.receptors div{width:86px;height:86px;box-sizing:border-box;border:4px solid #e9f2f8;background:rgba(7,12,20,.92);border-radius:12px;box-shadow:0 0 0 3px #111923,0 0 22px rgba(0,0,0,.65);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+.receptors .arrow{font-family:Arial,sans-serif;font-size:56px;font-weight:900;line-height:.8;text-shadow:3px 3px 0 #000;}
+.receptors small{font-family:'Press Start 2P';font-size:9px;color:#aebdca;line-height:1;margin-top:5px;}
+.receptors div.active{transform:translateY(5px) scale(.96);border-color:var(--yellow);background:rgba(255,225,74,.22);box-shadow:0 0 0 3px #111923,0 0 30px rgba(255,225,74,.5);}
+.lane-guide{position:absolute;top:0;bottom:0;width:86px;transform:translateX(-50%);background:rgba(255,255,255,.025);border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06);z-index:1;pointer-events:none;}
+.hit-line{position:absolute;left:50%;bottom:126px;width:374px;height:3px;transform:translateX(-50%);background:rgba(255,255,255,.7);box-shadow:0 0 12px rgba(255,255,255,.35);z-index:3;pointer-events:none;}
+@media(max-width:800px){.receptors{grid-template-columns:repeat(4,64px);gap:7px}.receptors div{width:64px;height:64px}.receptors .arrow{font-size:42px}.receptors small{font-size:7px}.note{width:54px;height:54px;font-size:40px}.hit-line{width:276px;bottom:100px}.lane-guide{width:64px}}
+
+/* FINAL GAMEPLAY OVERRIDE - always-visible FNF lanes */
+#game.screen.active{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;}
+#game .stage{position:relative!important;display:block!important;flex:1 1 auto!important;min-height:0!important;height:calc(100vh - 130px)!important;width:100%!important;overflow:hidden!important;}
+#game #noteField{position:absolute!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;height:100%!important;display:block!important;z-index:20!important;overflow:hidden!important;pointer-events:none!important;}
+#game .stage:after{z-index:5!important;}
+#game .character{z-index:7!important;}
+#game .receptors{position:absolute!important;left:50%!important;bottom:24px!important;transform:translateX(-50%)!important;z-index:50!important;display:grid!important;visibility:visible!important;opacity:1!important;}
+#game .receptors div{visibility:visible!important;opacity:1!important;}
+#game .receptors .arrow{display:block!important;visibility:visible!important;font-size:58px!important;line-height:58px!important;}
+#game .receptors small{display:block!important;visibility:visible!important;}
+#game .lane-guide{z-index:8!important;background:rgba(255,255,255,.035)!important;}
+#game .hit-line{z-index:25!important;}
+#game .note{z-index:30!important;display:grid!important;visibility:visible!important;opacity:1!important;width:74px!important;height:74px!important;font-size:54px!important;border-radius:14px!important;color:#fff!important;}
+#game .note[data-lane="2"],#game .note[data-lane="3"]{color:#111!important;}
+@media(max-width:800px){#game .stage{height:calc(100vh - 130px)!important}.receptors{bottom:20px!important}.note{width:58px!important;height:58px!important;font-size:42px!important}}
